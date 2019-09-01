@@ -16,12 +16,25 @@ html {
   .page__containter {
     margin: 0 auto;
     width: 100%;
-    max-width: 500px; 
+    max-width: 450px; 
     background-color: #fafafa;}
 
 .weatherbox {
   display: flex;
   flex-direction: column;}
+  .weatherbox__card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;}
+  .weatherbox__card-title{
+    padding: 5px 5px;
+    text-align: center;
+    background-color: #FEBE3A;
+  }
+  .weatherbox__card-block{
+    display: flex;
+    flex-direction: row;
+  }
 
 
 .form {
@@ -39,5 +52,7 @@ html {
     padding: 5px 5px;
   }
   
+
+
 
 
