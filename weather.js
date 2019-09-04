@@ -1,48 +1,43 @@
-const form = document.forms.wform;
-const search = form.elements.search;
-const submit = form.elements.submit;
-const cardTitle = document.getElementById('card-title');
-const cardTemp = document.getElementById('card-temp');
-const cardCloud = document.getElementById('card-cloud');
-const cardWind = document.getElementById('card-wind');
+const formInput = document.querySelector('.form__search');
+const formSubmit = document.querySelector('.form__submit');
+const card = document.querySelector('.weatherbox__card');
+
 const urlTest = 'http://api.openweathermap.org/data/2.5/weather?q=London&appid=90881fcf171be6ed244c774968bee955';
 
-submit.addEventListener( "click" , () => {
-   event.preventDefault();
-   let cityName = search.value;
-   let units = 'metric';
-   const APPID = '90881fcf171be6ed244c774968bee955';
-   let url = new URL('http://api.openweathermap.org/data/2.5/weather');
-   url.searchParams.set('q', cityName);
-   url.searchParams.set('units', units);
-   url.searchParams.set('appid', APPID);
+formSubmit.addEventListener( "click" , () => {
+  event.preventDefault();
+  url = 'http://api.openweathermap.org/data/2.5/weather?q='+ formInput.value +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
 
-   let xhr = new XMLHttpRequest();
-   xhr.open('GET', url);
-   xhr.responseType = 'json';
-   xhr.send();
-
-   xhr.onload = function() {
-    if (xhr.status != 200) { 
-      alert( 'Ошибка: ' + xhr.status);
-      return;
+  fetch(url)
+  .then(function(result){
+    if (result.ok) {
+      return result.json();
     }
-    let responseObj = xhr.response;
-    cardTitle.innerHTML = responseObj.name;
-    cardTemp.innerHTML =  responseObj.main.temp + ' &deg;C';
-    cardCloud.innerHTML = responseObj.weather[0]['description'];
-    cardWind.innerHTML = responseObj.wind.speed + ' m/s';
-  };
-  
-  xhr.onprogress = function(event) {
-    //прогресс
-  };
+  })
+  .then( function(data){
+    
+    let cardTitle = document.createElement('div');
+    cardTitle.className = "weatherbox__card-title";
+    cardTitle.innerHTML = data.name;
+    card.append(cardTitle);
 
-  xhr.onerror = function() {
-    alert("Запрос не удался");
-  };
-   
-});
+    let cardTemp = document.createElement('div');
+    cardTemp.className = "weatherbox__card-temp";
+    cardTemp.innerHTML = data.main.temp;
+    card.append(cardTemp);
 
+    let cardCloud = document.createElement('div');
+    cardCloud.className = "weatherbox__card-cloud";
+    cardCloud.innerHTML = data.weather[0]['description'];
+    card.append(cardCloud);
+
+    let cardWind = document.createElement('div');
+    cardWind.className = "weatherbox__card-wind";
+    cardWind.innerHTML = data.wind.speed;
+    card.append(cardWind);
+
+  })
+  }//end collback
+);//addEventListener
 
 
