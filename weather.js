@@ -13,11 +13,10 @@ function addCard(data) {
     cardIcon.className = "weatherbox__card-icon";
     cardIcon.style.backgroundImage = 'url(http://openweathermap.org/img/wn/'+data.weather[0]['icon']+'@2x.png)';
     cardIcon.style.backgroundRepeat = 'no-repeat';
-    cardIcon.innerHTML = '<br><br><br><br><br>'
 
     const cardTemp = document.createElement('div');
     cardTemp.className = "weatherbox__card-temp";
-    cardTemp.innerHTML = data.main.temp + ' &deg;C';
+    cardTemp.innerHTML = Math.round(data.main.temp) + '&deg;C';
 
     const cardCloud = document.createElement('div');
     cardCloud.className = "weatherbox__card-cloud";
@@ -27,11 +26,16 @@ function addCard(data) {
     cardWind.className = "weatherbox__card-wind";
     cardWind.innerHTML = 'Ветер ' + data.wind.speed + ' м/с';
 
+    const cardBlock = document.createElement('div');
+    cardBlock.className = "weatherbox__card-block";
+
     const card = document.createElement('div');
     card.className = "weatherbox__card";
+
+    cardBlock.append(cardIcon);
+    cardBlock.append(cardTemp);
     card.append(cardTitle);
-    card.append(cardIcon);
-    card.append(cardTemp);
+    card.append(cardBlock);
     card.append(cardCloud );
     card.append(cardWind);
 
