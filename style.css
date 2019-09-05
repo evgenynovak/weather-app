@@ -7,6 +7,8 @@ html {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+* {font-family: 'Open Sans', sans-serif;}
+
 
 
 .page {
@@ -29,14 +31,38 @@ html {
   .weatherbox__card-title{
     padding: 5px 5px;
     text-align: center;
-    background-color: #FEBE3A;
-  }
+    background-color: #FEBE3A;}
   .weatherbox__card-block{
     display: flex;
-    flex-direction: row;
-  }
-
-
+    flex-direction: row;}
+   .weatherbox__card-icon{
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: center;
+    background-position: center center;
+    background-color: #ffffff}
+   .weatherbox__card-temp{
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+    font-family: 'Oswald', sans-serif;
+    background-color: #ffffff}
+    .weatherbox__card-cloud{
+      padding-top: 10px;
+      text-align: center;
+      background-color: #ffffff
+    }
+    .weatherbox__card-wind{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      text-align: center;
+      background-color: #ffffff
+    }
+  
 .form {
   display: flex;
   flex-direction: row;
