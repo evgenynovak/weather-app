@@ -9,6 +9,12 @@ function addCard(data) {
     cardTitle.className = "weatherbox__card-title";
     cardTitle.innerHTML = data.name;
 
+    const cardIcon = document.createElement('div');
+    cardIcon.className = "weatherbox__card-icon";
+    cardIcon.style.backgroundImage = 'url(http://openweathermap.org/img/wn/'+data.weather[0]['icon']+'@2x.png)';
+    cardIcon.style.backgroundRepeat = 'no-repeat';
+    cardIcon.innerHTML = '<br><br><br><br><br>'
+
     const cardTemp = document.createElement('div');
     cardTemp.className = "weatherbox__card-temp";
     cardTemp.innerHTML = data.main.temp + ' &deg;C';
@@ -24,6 +30,7 @@ function addCard(data) {
     const card = document.createElement('div');
     card.className = "weatherbox__card";
     card.append(cardTitle);
+    card.append(cardIcon);
     card.append(cardTemp);
     card.append(cardCloud );
     card.append(cardWind);
@@ -44,11 +51,12 @@ formSubmit.addEventListener( "click" , (event) => {
 
     }
   })
-  .then( function(data){
+  .then( function(data) {
     if ( document.querySelector('.weatherbox__card') ) {
       const delCard = document.querySelector('.weatherbox__card');
       delCard.remove();
     };
+
     weatherbox.append(addCard(data));
   })
   }//end collback
