@@ -1,7 +1,6 @@
 const formInput = document.querySelector('.form__search');
 const formSubmit = document.querySelector('.form__submit');
 const weatherbox = document.querySelector('.weatherbox');
-const urlTest = 'http://api.openweathermap.org/data/2.5/weather?q=London&appid=90881fcf171be6ed244c774968bee955';
 
 function addCard(data) {
 
@@ -42,10 +41,28 @@ function addCard(data) {
     return card;
 };
 
+navigator.geolocation.getCurrentPosition(
+  function(position) {
+    const urlWithCord = 'http://api.openweathermap.org/data/2.5/weather?lat='+ position.coords.latitude +'&lon='+ position.coords.longitude +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
+    fetch(urlWithCord)
+      .then(function(result){
+        if (result.ok) {
+          return result.json();
+        }
+     })
+     .then( function(data) {
+      if ( document.querySelector('.weatherbox__card') ) {
+        const delCard = document.querySelector('.weatherbox__card');
+        delCard.remove();
+      };
+      weatherbox.append(addCard(data));
+    })
+}
+);
 
 formSubmit.addEventListener( "click" , (event) => {
   event.preventDefault();
-  url = 'http://api.openweathermap.org/data/2.5/weather?q='+ formInput.value +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
+  const url = 'http://api.openweathermap.org/data/2.5/weather?q='+ formInput.value +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
 
   fetch(url)
   .then(function(result){
