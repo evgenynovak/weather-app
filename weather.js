@@ -32,7 +32,7 @@ function addCard(data) {  // карточка город с данными
 
     const cardIcon = document.createElement('div');
     cardIcon.className = 'weatherbox__card-icon';
-    cardIcon.style.backgroundImage = 'url(http://openweathermap.org/img/wn/'+data.weather[0]['icon']+'@2x.png)';
+    cardIcon.style.backgroundImage = 'url(https://openweathermap.org/img/wn/'+data.weather[0]['icon']+'@2x.png)';
     cardIcon.style.backgroundRepeat = 'no-repeat';
 
     const cardTemp = document.createElement('div');
@@ -65,7 +65,7 @@ function addCard(data) {  // карточка город с данными
 
 navigator.geolocation.getCurrentPosition(
   function(position) {
-    const urlWithCord = 'http://api.openweathermap.org/data/2.5/weather?lat='+ position.coords.latitude +'&lon='+ position.coords.longitude +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
+    const urlWithCord = 'https://api.openweathermap.org/data/2.5/weather?lat='+ position.coords.latitude +'&lon='+ position.coords.longitude +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
     fetch(urlWithCord)
       .then(function(result){
         if (result.ok) {
@@ -80,11 +80,11 @@ navigator.geolocation.getCurrentPosition(
 
 formSubmit.addEventListener( 'click' , (event) => {
   event.preventDefault();
-  const url = 'http://api.openweathermap.org/data/2.5/weather?q='+ formInput.value +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
+  const url = 'https://api.openweathermap.org/data/2.5/weather?q='+ formInput.value +'&units=metric&lang=ru&appid=90881fcf171be6ed244c774968bee955';
 
   fetch(url)
   .then(function(result){
-    console.log('fetch получили ответ: ' + result.status);
+    console.log('fetch result получили ответ: ' + result.status);
     if (result.ok) {
       return result.json();
     } else if  (result.status === 404) {
